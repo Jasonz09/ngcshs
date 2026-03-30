@@ -2678,7 +2678,7 @@ body.fade-out {
     --text-white: #ffffff;
     --gradient-1: #1d4ed8;
     --gradient-2: #facc15;
-    --gradient-3: #93c5fd;
+    --gradient-3: #dbeafe;
     --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
     --shadow-md: 0 12px 32px rgba(15, 23, 42, 0.08);
     --shadow-lg: 0 22px 56px rgba(15, 23, 42, 0.12);
@@ -2921,29 +2921,39 @@ section {
 }
 
 .core-values {
-    background: #0f172a;
+    background: linear-gradient(180deg, #f8fafc 0%, #eef4ff 100%);
     padding: 5rem 0;
-    color: var(--text-white);
+    color: var(--text-dark);
 }
 
 .core-values .section-title,
 .core-values .section-subtitle {
-    color: var(--text-white);
+    color: var(--text-dark);
 }
 
 .core-values .section-title::after {
-    background: rgba(255, 255, 255, 0.85);
+    background: var(--secondary-color);
 }
 
 .value-card {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: none;
+    background: #ffffff;
+    border: 1px solid rgba(29, 78, 216, 0.1);
+    box-shadow: var(--shadow-md);
+    color: var(--text-dark);
 }
 
 .value-card:hover {
-    background: rgba(255, 255, 255, 0.09);
+    background: #ffffff;
     box-shadow: var(--shadow-lg);
+    border-color: rgba(250, 204, 21, 0.4);
+}
+
+.value-card h3 {
+    color: var(--text-dark);
+}
+
+.value-card p {
+    color: var(--text-light);
 }
 
 .event-card {
@@ -2954,12 +2964,13 @@ section {
 
 .event-illustration,
 .event-icon-illustration {
-    background: var(--primary-color);
+    background: linear-gradient(180deg, #eff6ff 0%, #dbeafe 100%);
 }
 
 .event-date-badge {
-    background: #fef3c7;
+    background: #facc15;
     color: var(--text-dark);
+    box-shadow: 0 8px 18px rgba(250, 204, 21, 0.18);
 }
 
 .event-title {
@@ -2971,7 +2982,7 @@ section {
 .meeting-card-event .event-illustration,
 .meeting-card-event .event-icon-illustration,
 .meeting-card-event .event-date-badge {
-    background: var(--primary-color);
+    background: #facc15;
 }
 
 .meeting-card-event .event-title {
@@ -3043,17 +3054,18 @@ section {
 }
 
 .form-card::before {
-    background: linear-gradient(135deg, rgba(29, 78, 216, 0.45), rgba(250, 204, 21, 0.5));
+    background: linear-gradient(135deg, rgba(29, 78, 216, 0.25), rgba(250, 204, 21, 0.35));
 }
 
 .form-card-header,
 .modal-header,
 #form-fill-header {
-    background: #1d4ed8 !important;
+    background: #eff6ff !important;
+    border-bottom: 1px solid rgba(29, 78, 216, 0.1);
 }
 
 .form-status {
-    background: rgba(250, 204, 21, 0.18);
+    background: rgba(250, 204, 21, 0.2);
     color: #0f172a;
     border-color: rgba(250, 204, 21, 0.28);
 }
@@ -3097,7 +3109,8 @@ section {
 #create-picture-post-modal .modal-header,
 #image-upload-modal .modal-header,
 #responses-modal .modal-header {
-    background: #1d4ed8 !important;
+    background: #eff6ff !important;
+    border-bottom: 1px solid rgba(29, 78, 216, 0.1);
 }
 
 .modal-title,
@@ -3106,7 +3119,7 @@ section {
 #form-fill-description,
 #responses-form-title,
 #responses-count {
-    color: #ffffff !important;
+    color: var(--text-dark) !important;
 }
 
 .toggle-btn.active,
