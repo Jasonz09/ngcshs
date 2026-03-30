@@ -9,7 +9,7 @@
     <title>NGHS — National Computer Science Honor Society</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
 /* ===================================
@@ -48,7 +48,7 @@ html {
 }
 
 body {
-    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
     background-color: var(--light-bg);
@@ -2667,15 +2667,18 @@ body.fade-out {
    Modern Visual Refresh
    =================================== */
 :root {
-    --primary-color: #0f172a;
-    --secondary-color: #2563eb;
-    --accent-color: #0f766e;
-    --dark-bg: #0b1220;
-    --light-bg: #f5f7fb;
-    --card-bg: rgba(255, 255, 255, 0.92);
+    --primary-color: #1d4ed8;
+    --secondary-color: #facc15;
+    --accent-color: #0f172a;
+    --dark-bg: #0f172a;
+    --light-bg: #f8fafc;
+    --card-bg: rgba(255, 255, 255, 0.96);
     --text-dark: #0f172a;
     --text-light: #475569;
     --text-white: #ffffff;
+    --gradient-1: #1d4ed8;
+    --gradient-2: #facc15;
+    --gradient-3: #93c5fd;
     --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
     --shadow-md: 0 12px 32px rgba(15, 23, 42, 0.08);
     --shadow-lg: 0 22px 56px rgba(15, 23, 42, 0.12);
@@ -2701,8 +2704,8 @@ h3,
 .officer-name,
 .meeting-activity,
 .placeholder-content h2 {
-    font-family: 'Space Grotesk', 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    letter-spacing: -0.04em;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    letter-spacing: -0.03em;
 }
 
 .navbar {
@@ -2724,7 +2727,7 @@ h3,
 .brand-text {
     background: none !important;
     -webkit-text-fill-color: currentColor !important;
-    color: var(--text-dark) !important;
+    color: var(--primary-color) !important;
     font-size: 1.25rem;
 }
 
@@ -2748,18 +2751,25 @@ h3,
 }
 
 .hero::before {
-    display: none;
+    content: '';
+    position: absolute;
+    left: -120px;
+    top: 90px;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: rgba(29, 78, 216, 0.08);
 }
 
 .hero::after {
     content: '';
     position: absolute;
-    top: -90px;
-    right: -90px;
-    width: 260px;
-    height: 260px;
+    top: -70px;
+    right: -70px;
+    width: 240px;
+    height: 240px;
     border-radius: 50%;
-    background: rgba(37, 99, 235, 0.08);
+    background: rgba(250, 204, 21, 0.14);
 }
 
 .hero-content {
@@ -2795,13 +2805,13 @@ h3,
     align-items: center;
     justify-content: center;
     padding: 0.95rem 1.8rem;
-    background: var(--text-dark);
-    color: var(--text-white);
+    background: var(--secondary-color);
+    color: var(--text-dark);
     text-decoration: none;
     border-radius: 999px;
     font-weight: 700;
     font-size: 1rem;
-    border: 1px solid var(--text-dark);
+    border: 1px solid rgba(250, 204, 21, 0.9);
     box-shadow: none;
     animation: fadeInUp 0.8s ease 0.4s;
     animation-fill-mode: both;
@@ -2809,7 +2819,7 @@ h3,
 
 .cta-button:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 14px 26px rgba(29, 78, 216, 0.15);
 }
 
 section {
@@ -2869,6 +2879,17 @@ section {
     border-radius: 24px;
 }
 
+.about-card,
+.contact-card,
+.meeting-card,
+.faq-item,
+.picture-post-card,
+.form-card,
+.officer-card,
+.event-card {
+    background: #ffffff;
+}
+
 .about-card:hover,
 .contact-card:hover,
 .meeting-card:hover,
@@ -2900,7 +2921,7 @@ section {
 }
 
 .core-values {
-    background: var(--dark-bg);
+    background: #0f172a;
     padding: 5rem 0;
     color: var(--text-white);
 }
@@ -2933,11 +2954,11 @@ section {
 
 .event-illustration,
 .event-icon-illustration {
-    background: var(--dark-bg);
+    background: var(--primary-color);
 }
 
 .event-date-badge {
-    background: #e2e8f0;
+    background: #fef3c7;
     color: var(--text-dark);
 }
 
@@ -2950,11 +2971,11 @@ section {
 .meeting-card-event .event-illustration,
 .meeting-card-event .event-icon-illustration,
 .meeting-card-event .event-date-badge {
-    background: var(--accent-color);
+    background: var(--primary-color);
 }
 
 .meeting-card-event .event-title {
-    color: var(--accent-color);
+    color: var(--primary-color);
 }
 
 .btn-primary,
@@ -2962,10 +2983,10 @@ section {
 .admin-control,
 .form-button.active,
 .cta-button {
-    background: var(--text-dark) !important;
+    background: var(--primary-color) !important;
     background-image: none !important;
     color: var(--text-white) !important;
-    border: 1px solid var(--text-dark) !important;
+    border: 1px solid var(--primary-color) !important;
     box-shadow: none !important;
 }
 
@@ -2974,20 +2995,20 @@ section {
 .admin-control:hover,
 .form-button.active:hover,
 .cta-button:hover {
-    background: #111827 !important;
-    box-shadow: var(--shadow-md) !important;
+    background: #1e40af !important;
+    box-shadow: 0 14px 26px rgba(29, 78, 216, 0.18) !important;
 }
 
 .btn-secondary {
     background: #ffffff;
     color: var(--text-dark);
-    border: 1px solid var(--surface-border);
+    border: 1px solid rgba(29, 78, 216, 0.14);
     box-shadow: none;
 }
 
 .btn-secondary:hover {
     background: #f8fafc;
-    border-color: #cbd5e1;
+    border-color: rgba(250, 204, 21, 0.55);
 }
 
 .login-modal {
@@ -2995,12 +3016,12 @@ section {
 }
 
 .login-icon {
-    background: var(--text-dark);
+    background: var(--primary-color);
     box-shadow: none;
 }
 
 .login-icon::before {
-    background: #ffffff;
+    background: #fef3c7;
 }
 
 .login-container,
@@ -3017,8 +3038,126 @@ section {
 }
 
 .form-input:focus {
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.12);
+}
+
+.form-card::before {
+    background: linear-gradient(135deg, rgba(29, 78, 216, 0.45), rgba(250, 204, 21, 0.5));
+}
+
+.form-card-header,
+.modal-header,
+#form-fill-header {
+    background: #1d4ed8 !important;
+}
+
+.form-status {
+    background: rgba(250, 204, 21, 0.18);
+    color: #0f172a;
+    border-color: rgba(250, 204, 21, 0.28);
+}
+
+.form-button {
+    background: var(--primary-color);
+    color: white;
+}
+
+.form-button.active:hover {
+    box-shadow: 0 12px 24px rgba(29, 78, 216, 0.2);
+}
+
+.picture-post-title,
+.meeting-activity {
+    color: var(--text-dark);
+}
+
+.picture-post-footer,
+.picture-post-header {
+    border-color: var(--surface-border);
+}
+
+.contact-card a,
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+.mobile-nav-link:hover {
+    color: var(--secondary-color);
+}
+
+.placeholder-content h2 {
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+    color: var(--text-dark);
+}
+
+.modal-header,
+#form-fill-header,
+#create-picture-post-modal .modal-header,
+#image-upload-modal .modal-header,
+#responses-modal .modal-header {
+    background: #1d4ed8 !important;
+}
+
+.modal-title,
+.modal-subtitle,
+#form-fill-title,
+#form-fill-description,
+#responses-form-title,
+#responses-count {
+    color: #ffffff !important;
+}
+
+.toggle-btn.active,
+.response-tab.active {
+    background: #facc15 !important;
+    color: #0f172a !important;
+}
+
+.toggle-btn,
+.response-tab {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+.create-event-container,
+.calendar-container {
+    background: #ffffff !important;
+}
+
+.picture-post-card,
+.form-card,
+.officer-card,
+.event-card,
+.login-container,
+.create-event-container,
+.calendar-container {
+    box-shadow: var(--shadow-md) !important;
+}
+
+.section-title,
+.hero-title,
+.placeholder-content h2 {
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+}
+
+.hero-title,
+.section-title {
+    color: var(--text-dark);
+}
+
+.hero {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+}
+
+.hero::before {
+    background: rgba(29, 78, 216, 0.08);
+}
+
+.hero::after {
+    background: rgba(250, 204, 21, 0.18);
 }
 
 .picture-post-header,
