@@ -9,7 +9,7 @@
     <title>NGHS — National Computer Science Honor Society</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
 /* ===================================
@@ -48,7 +48,7 @@ html {
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
     background-color: var(--light-bg);
@@ -2661,6 +2661,433 @@ body.fade-out {
     font-size: 1.2rem;
     color: var(--text-light);
     line-height: 1.8;
+}
+
+/* ===================================
+   Modern Visual Refresh
+   =================================== */
+:root {
+    --primary-color: #0f172a;
+    --secondary-color: #2563eb;
+    --accent-color: #0f766e;
+    --dark-bg: #0b1220;
+    --light-bg: #f5f7fb;
+    --card-bg: rgba(255, 255, 255, 0.92);
+    --text-dark: #0f172a;
+    --text-light: #475569;
+    --text-white: #ffffff;
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+    --shadow-md: 0 12px 32px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 22px 56px rgba(15, 23, 42, 0.12);
+    --shadow-xl: 0 32px 84px rgba(15, 23, 42, 0.16);
+    --surface-border: rgba(15, 23, 42, 0.08);
+}
+
+body {
+    background: var(--light-bg);
+    color: var(--text-dark);
+}
+
+h1,
+h2,
+h3,
+.nav-brand,
+.brand-text,
+.hero-title,
+.section-title,
+.login-title,
+.form-card-title,
+.picture-post-title,
+.officer-name,
+.meeting-activity,
+.placeholder-content h2 {
+    font-family: 'Space Grotesk', 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    letter-spacing: -0.04em;
+}
+
+.navbar {
+    background: rgba(255, 255, 255, 0.88);
+    border-bottom: 1px solid var(--surface-border);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+}
+
+.navbar .container {
+    padding-top: 0.95rem;
+    padding-bottom: 0.95rem;
+}
+
+.nav-brand {
+    color: var(--text-dark);
+    gap: 0.65rem;
+}
+
+.brand-text {
+    background: none !important;
+    -webkit-text-fill-color: currentColor !important;
+    color: var(--text-dark) !important;
+    font-size: 1.25rem;
+}
+
+.nav-link {
+    color: var(--text-light);
+}
+
+.nav-link::after {
+    background: var(--secondary-color);
+}
+
+.hero {
+    margin-top: 72px;
+    padding: 7rem 0 5.5rem;
+    background: #ffffff;
+    color: var(--text-dark);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--surface-border);
+}
+
+.hero::before {
+    display: none;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: -90px;
+    right: -90px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: rgba(37, 99, 235, 0.08);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.hero-title {
+    font-size: clamp(3rem, 7vw, 5.25rem);
+    line-height: 0.98;
+    margin-bottom: 1.25rem;
+    color: var(--text-dark);
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+    animation: fadeInUp 0.8s ease;
+}
+
+.hero-subtitle {
+    font-size: 1.15rem;
+    max-width: 720px;
+    margin: 0 auto 2rem;
+    color: var(--text-light);
+    opacity: 1;
+    animation: fadeInUp 0.8s ease 0.2s;
+    animation-fill-mode: both;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.95rem 1.8rem;
+    background: var(--text-dark);
+    color: var(--text-white);
+    text-decoration: none;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 1rem;
+    border: 1px solid var(--text-dark);
+    box-shadow: none;
+    animation: fadeInUp 0.8s ease 0.4s;
+    animation-fill-mode: both;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+section {
+    padding: 4.5rem 0;
+}
+
+.section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--text-dark);
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+    text-align: left;
+    margin-bottom: 0.75rem;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 72px;
+    height: 4px;
+    margin-top: 0.85rem;
+    border-radius: 999px;
+    background: var(--secondary-color);
+}
+
+.section-subtitle {
+    text-align: left;
+    color: var(--text-light);
+    max-width: 640px;
+    margin: 0 0 2rem;
+}
+
+.about,
+.contact,
+.meetings,
+.faq-section,
+.pictures-section,
+.officers-section,
+.placeholder-page {
+    background: transparent;
+}
+
+.about-card,
+.contact-card,
+.meeting-card,
+.faq-item,
+.picture-post-card,
+.form-card,
+.officer-card,
+.event-card,
+.login-container,
+.create-event-container,
+.calendar-container {
+    background: var(--card-bg);
+    border: 1px solid var(--surface-border);
+    box-shadow: var(--shadow-md);
+    border-radius: 24px;
+}
+
+.about-card:hover,
+.contact-card:hover,
+.meeting-card:hover,
+.faq-item:hover,
+.picture-post-card:hover,
+.form-card:hover,
+.officer-card:hover,
+.event-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+}
+
+.about-card,
+.contact-card,
+.faq-item,
+.meeting-card {
+    background: #ffffff;
+}
+
+.about-card {
+    padding: 2rem;
+}
+
+.card-icon,
+.contact-icon,
+.value-icon,
+.form-icon {
+    color: var(--secondary-color);
+}
+
+.core-values {
+    background: var(--dark-bg);
+    padding: 5rem 0;
+    color: var(--text-white);
+}
+
+.core-values .section-title,
+.core-values .section-subtitle {
+    color: var(--text-white);
+}
+
+.core-values .section-title::after {
+    background: rgba(255, 255, 255, 0.85);
+}
+
+.value-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+}
+
+.value-card:hover {
+    background: rgba(255, 255, 255, 0.09);
+    box-shadow: var(--shadow-lg);
+}
+
+.event-card {
+    background: #ffffff;
+    border: 1px solid var(--surface-border);
+    box-shadow: var(--shadow-lg);
+}
+
+.event-illustration,
+.event-icon-illustration {
+    background: var(--dark-bg);
+}
+
+.event-date-badge {
+    background: #e2e8f0;
+    color: var(--text-dark);
+}
+
+.event-title {
+    color: var(--text-dark);
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+}
+
+.meeting-card-event .event-illustration,
+.meeting-card-event .event-icon-illustration,
+.meeting-card-event .event-date-badge {
+    background: var(--accent-color);
+}
+
+.meeting-card-event .event-title {
+    color: var(--accent-color);
+}
+
+.btn-primary,
+.admin-action-btn,
+.admin-control,
+.form-button.active,
+.cta-button {
+    background: var(--text-dark) !important;
+    background-image: none !important;
+    color: var(--text-white) !important;
+    border: 1px solid var(--text-dark) !important;
+    box-shadow: none !important;
+}
+
+.btn-primary:hover,
+.admin-action-btn:hover,
+.admin-control:hover,
+.form-button.active:hover,
+.cta-button:hover {
+    background: #111827 !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+.btn-secondary {
+    background: #ffffff;
+    color: var(--text-dark);
+    border: 1px solid var(--surface-border);
+    box-shadow: none;
+}
+
+.btn-secondary:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.login-modal {
+    background: rgba(15, 23, 42, 0.55);
+}
+
+.login-icon {
+    background: var(--text-dark);
+    box-shadow: none;
+}
+
+.login-icon::before {
+    background: #ffffff;
+}
+
+.login-container,
+.create-event-container {
+    background: #ffffff !important;
+    border: 1px solid var(--surface-border) !important;
+    box-shadow: var(--shadow-xl) !important;
+}
+
+.form-input {
+    border: 1px solid var(--surface-border);
+    box-shadow: none;
+    background: #ffffff;
+}
+
+.form-input:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.picture-post-header,
+.picture-post-footer {
+    background: #ffffff;
+    border-color: var(--surface-border);
+}
+
+.picture-post-carousel {
+    background: #eef2f7;
+}
+
+.carousel-nav,
+.picture-post-menu-btn {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid var(--surface-border);
+    color: var(--text-dark);
+}
+
+.carousel-dot {
+    background: rgba(15, 23, 42, 0.2);
+}
+
+.carousel-dot.active {
+    background: var(--text-dark);
+    width: 24px;
+}
+
+.mobile-menu {
+    background: rgba(15, 23, 42, 0.96);
+}
+
+.placeholder-page {
+    background: #f5f7fb;
+}
+
+.placeholder-content h2 {
+    color: var(--text-dark);
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+}
+
+footer {
+    background: var(--dark-bg);
+    color: rgba(255, 255, 255, 0.78);
+}
+
+footer a {
+    color: #93c5fd;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        text-align: center;
+    }
+
+    .section-title,
+    .section-subtitle {
+        text-align: center;
+    }
+
+    .section-title::after {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-content {
+        padding: 0 1.25rem;
+    }
 }
 
     </style>
