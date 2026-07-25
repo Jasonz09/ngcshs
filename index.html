@@ -9286,6 +9286,7 @@ h4,
         let attendanceLastOcrQuality = null;
         let attendanceMemberRoster = [];
         let attendanceAiFallbackMessage = '';
+        const ATTENDANCE_SCAN_RETENTION_YEARS = 4;
 
         const ATTENDANCE_AI_ENDPOINT = (() => {
             const configuredEndpoint = String(window.NG_CSHS_ATTENDANCE_AI_ENDPOINT || '').trim();
@@ -9528,6 +9529,37 @@ h4,
                 year: 'numeric',
                 hour: 'numeric',
                 minute: '2-digit'
+            });
+        }
+
+        function parseAttendanceScanTimestamp(scan) {
+            const dateCandidates = [
+                scan?.savedAt,
+                scan?.createdAt,
+                scan?.scanDate ? `${scan.scanDate}T00:00:00` : ''
+            ];
+
+            for (const value of dateCandidates) {
+                if (!value) continue;
+                const timestamp = new Date(value).getTime();
+                if (!Number.isNaN(timestamp)) {
+                    return timestamp;
+                }
+            }
+
+            return null;
+        }
+
+        function pruneExpiredAttendanceScans(scans, now = new Date()) {
+            if (!Array.isArray(scans)) return [];
+
+            const cutoff = new Date(now);
+            cutoff.setFullYear(cutoff.getFullYear() - ATTENDANCE_SCAN_RETENTION_YEARS);
+            const cutoffTime = cutoff.getTime();
+
+            return scans.filter(scan => {
+                const timestamp = parseAttendanceScanTimestamp(scan);
+                return timestamp === null || timestamp >= cutoffTime;
             });
         }
 
@@ -10775,6 +10807,7 @@ h4,
                 createdAt: savedAt
             };
 
+            attendanceScans = pruneExpiredAttendanceScans(attendanceScans);
             attendanceScans.unshift(scan);
             const saved = await saveData('attendanceScans', attendanceScans);
             if (!saved) {
@@ -10810,7 +10843,11 @@ h4,
             }
 
             const scans = await loadData('attendanceScans', []);
-            attendanceScans = Array.isArray(scans) ? scans : [];
+            const loadedScans = Array.isArray(scans) ? scans : [];
+            attendanceScans = pruneExpiredAttendanceScans(loadedScans);
+            if (attendanceScans.length !== loadedScans.length) {
+                await saveData('attendanceScans', attendanceScans);
+            }
             attendanceScans.sort((a, b) => {
                 const aDate = a.scanDate || a.createdAt || '';
                 const bDate = b.scanDate || b.createdAt || '';

@@ -1,0 +1,48 @@
+{
+  "rules": {
+    "contacts": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "customEvents": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "customMeetings": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "customForms": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "formSubmissions": {
+      ".read": true,
+      ".write": true
+    },
+    "picturePosts": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "officerCategories": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "officerRoles": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "faqs": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "attendanceMemberRoster": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "attendanceScans": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
+  }
+}
