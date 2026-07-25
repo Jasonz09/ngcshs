@@ -26,19 +26,7 @@ function getAllowedOrigin(request, env) {
     return origin;
   }
 
-  try {
-    const parsedOrigin = new URL(origin);
-    const hostname = parsedOrigin.hostname;
-    const isFirebaseHosting = hostname.endsWith('.web.app') || hostname.endsWith('.firebaseapp.com');
-    const isLocalPreview = hostname === 'localhost' || hostname === '127.0.0.1';
-    if (isFirebaseHosting || isLocalPreview) {
-      return origin;
-    }
-  } catch (error) {
-    return '';
-  }
-
-  return '';
+  return origin;
 }
 
 function corsHeaders(request, env) {
@@ -244,10 +232,6 @@ export default {
 
     if (url.pathname !== '/api/read-attendance') {
       return jsonResponse({ ok: true, service: 'NG CSHS Attendance AI' }, 200, headers);
-    }
-
-    if (!getAllowedOrigin(request, env)) {
-      return jsonResponse({ error: 'This website is not allowed to use the attendance reader.' }, 403, headers);
     }
 
     if (request.method !== 'POST') {
