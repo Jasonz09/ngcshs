@@ -1,0 +1,13 @@
+name = "ng-cshs-attendance-ai"
+main = "src/index.js"
+compatibility_date = "2026-07-24"
+
+[vars]
+FIREBASE_PROJECT_ID = "ng-cshs-website"
+FIREBASE_WEB_API_KEY = "AIzaSyBrVV2R5UL6sqg8Urb9GKO_PPTaVMGGZ9A"
+GEMINI_MODEL = "gemini-3.6-flash"
+ADMIN_EMAILS = "northgwinnettcshs@gmail.com,zhaojason2009@gmail.com"
+ALLOWED_ORIGINS = "https://ng-cshs-website.web.app,https://ng-cshs-website.firebaseapp.com,https://nghs-cshs.web.app,https://nghs-cshs.firebaseapp.com,http://localhost:4173,http://127.0.0.1:4173"
+
+[observability]
+enabled = true
