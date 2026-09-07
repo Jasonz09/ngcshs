@@ -151,61 +151,79 @@ async function readAttendanceWithGemini(body, env) {
 
   const prompt = buildPrompt({ meetingTitle, scanDate, roster });
   const model = env.GEMINI_MODEL || 'gemini-3.6-flash';
-  const geminiResponse = await fetch(`${GEMINI_API_URL}/${model}:generateContent?key=${encodeURIComponent(env.GEMINI_API_KEY)}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      contents: [
-        {
-          role: 'user',
-          parts: [
-            { text: prompt },
-            {
-              inline_data: {
-                mime_type: inlineImage.mimeType,
-                data: inlineImage.data
-              }
+  const requestBody = JSON.stringify({
+    contents: [
+      {
+        role: 'user',
+        parts: [
+          { text: prompt },
+          {
+            inline_data: {
+              mime_type: inlineImage.mimeType,
+              data: inlineImage.data
             }
-          ]
-        }
-      ],
-      generationConfig: {
-        temperature: 0.15,
-        responseMimeType: 'application/json',
-        responseSchema: {
-          type: 'object',
-          properties: {
-            names: {
-              type: 'array',
-              items: {
-                type: 'object',
-                properties: {
-                  fullName: { type: 'string' }
-                },
-                required: ['fullName']
-              }
-            }
-          },
-          required: ['names']
-        }
+          }
+        ]
       }
-    })
+    ],
+    generationConfig: {
+      temperature: 0.15,
+      responseMimeType: 'application/json',
+      responseSchema: {
+        type: 'object',
+        properties: {
+          names: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                fullName: { type: 'string' }
+              },
+              required: ['fullName']
+            }
+          }
+        },
+        required: ['names']
+      }
+    }
   });
 
-  const responseJson = await geminiResponse.json();
-  if (!geminiResponse.ok) {
-    return {
-      error: responseJson?.error?.message || 'Gemini request failed.',
-      status: geminiResponse.status
-    };
+  const geminiUrl = `${GEMINI_API_URL}/${model}:generateContent?key=${encodeURIComponent(env.GEMINI_API_KEY)}`;
+  const retryableStatuses = new Set([429, 500, 503]);
+  let lastError = null;
+
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    const geminiResponse = await fetch(geminiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: requestBody
+    });
+
+    const responseJson = await geminiResponse.json().catch(() => ({}));
+    if (geminiResponse.ok) {
+      const parsed = parseJsonObject(extractOutputText(responseJson));
+      return {
+        names: uniqueNames(parsed.names),
+        source: 'gemini'
+      };
+    }
+
+    const errorMessage = responseJson?.error?.message || 'Gemini request failed.';
+    lastError = { status: geminiResponse.status, message: errorMessage };
+    if (!retryableStatuses.has(geminiResponse.status) && !/high demand|busy|temporarily unavailable|rate limit|resource exhausted/i.test(errorMessage)) {
+      break;
+    }
+
+    if (attempt < 3) {
+      await new Promise(resolve => setTimeout(resolve, attempt * 750));
+    }
   }
 
-  const parsed = parseJsonObject(extractOutputText(responseJson));
   return {
-    names: uniqueNames(parsed.names),
-    source: 'gemini'
+    error: lastError?.message || 'Gemini request failed.',
+    status: lastError?.status || 500
   };
 }
 

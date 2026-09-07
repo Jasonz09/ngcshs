@@ -4494,6 +4494,327 @@ h4,
     }
 }
 
+/* ===================================
+   Events Page Polish
+   =================================== */
+.view-toggle {
+    position: relative;
+    display: inline-grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 430px);
+    padding: 0.35rem !important;
+    gap: 0 !important;
+    border-radius: 999px !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(29, 78, 216, 0.1) !important;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+    overflow: hidden;
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+}
+
+.view-toggle-indicator {
+    position: absolute;
+    z-index: 0;
+    top: 0.35rem;
+    bottom: 0.35rem;
+    left: 0.35rem;
+    width: calc((100% - 0.7rem) / 2);
+    border-radius: 999px;
+    background: linear-gradient(135deg, #2457ff 0%, #4f7cff 100%);
+    box-shadow: 0 14px 28px rgba(29, 78, 216, 0.24);
+    transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.24s ease;
+}
+
+.view-toggle[data-view="calendar"] .view-toggle-indicator {
+    transform: translateX(100%);
+}
+
+.toggle-btn {
+    position: relative;
+    z-index: 1;
+    min-width: 0 !important;
+    min-height: 3.35rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.2rem !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    background: transparent !important;
+    color: var(--text-light) !important;
+    box-shadow: none !important;
+    cursor: pointer;
+    font-weight: 800;
+    letter-spacing: 0 !important;
+    transition: color 0.24s ease, transform 0.24s ease;
+}
+
+.toggle-btn.active {
+    background: transparent !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+    transform: none;
+}
+
+.toggle-btn:not(.active):hover {
+    color: var(--primary-color) !important;
+}
+
+.toggle-icon {
+    line-height: 1;
+}
+
+#event-list-view {
+    margin-top: 2.25rem !important;
+}
+
+#events-container {
+    gap: 1.25rem !important;
+}
+
+.event-card {
+    box-sizing: border-box;
+    display: grid !important;
+    grid-template-columns: 210px minmax(0, 1fr);
+    grid-auto-rows: minmax(196px, auto);
+    align-items: stretch;
+    min-height: 196px !important;
+    height: auto !important;
+    max-height: none !important;
+    border-radius: 28px !important;
+    border: 1px solid rgba(29, 78, 216, 0.1) !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+    box-shadow: 0 18px 44px rgba(15, 23, 42, 0.09) !important;
+    overflow: hidden;
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.event-card *,
+.event-card *::before,
+.event-card *::after {
+    box-sizing: border-box;
+}
+
+.event-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(29, 78, 216, 0.18) !important;
+    box-shadow: 0 26px 58px rgba(15, 23, 42, 0.13) !important;
+}
+
+.event-illustration,
+.event-icon-illustration {
+    position: relative;
+    align-self: stretch;
+    flex: none !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 1.4rem !important;
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 48%, #fef3c7 100%) !important;
+    border-right: 1px solid rgba(29, 78, 216, 0.08);
+}
+
+.meeting-card-event .event-illustration,
+.meeting-card-event .event-icon-illustration {
+    background: linear-gradient(135deg, #eff6ff 0%, #ffffff 45%, #fef3c7 100%) !important;
+}
+
+.event-illustration::after {
+    inset: 0.9rem;
+    border-radius: 20px;
+    background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.62), transparent 46%);
+}
+
+.event-icon-large,
+.meeting-icon-custom {
+    position: relative;
+    z-index: 1;
+    width: 88px;
+    height: 88px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 26px;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(29, 78, 216, 0.1);
+    color: var(--primary-color);
+    filter: none;
+    box-shadow: 0 16px 34px rgba(29, 78, 216, 0.16);
+    animation: float 4s ease-in-out infinite;
+}
+
+.event-icon-large svg,
+.meeting-icon-custom svg {
+    width: 46px !important;
+    height: 46px !important;
+    filter: none !important;
+}
+
+.event-content {
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 1.75rem 2rem !important;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.event-card-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-bottom: 0.8rem;
+}
+
+.event-type-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    padding: 0.38rem 0.78rem;
+    border-radius: 999px;
+    background: #eff6ff;
+    border: 1px solid rgba(29, 78, 216, 0.12);
+    color: var(--primary-color);
+    font-size: 0.82rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0;
+}
+
+.meeting-card-event .event-type-chip {
+    background: #fef3c7;
+    border-color: rgba(250, 204, 21, 0.5);
+    color: #854d0e;
+}
+
+.event-date-badge,
+.meeting-card-event .event-date-badge {
+    min-height: 2rem;
+    margin: 0 !important;
+    padding: 0.42rem 0.85rem !important;
+    border-radius: 999px !important;
+    background: #facc15 !important;
+    color: #0f172a !important;
+    box-shadow: 0 10px 22px rgba(250, 204, 21, 0.2);
+    font-size: 0.82rem !important;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0 !important;
+    text-transform: uppercase;
+}
+
+.event-title,
+.meeting-card-event .event-title {
+    margin: 0 !important;
+    padding: 0 !important;
+    color: var(--text-dark) !important;
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+    font-size: 2rem;
+    line-height: 1.12;
+    letter-spacing: 0 !important;
+    text-wrap: balance;
+}
+
+.event-description {
+    display: -webkit-box !important;
+    margin: 0.75rem 0 0;
+    max-width: 760px;
+    color: var(--text-light);
+    font-size: 1rem;
+    line-height: 1.62;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.modal-icon,
+.login-icon {
+    overflow: hidden;
+}
+
+.modal-icon svg {
+    color: var(--primary-color) !important;
+    stroke: var(--primary-color) !important;
+}
+
+.login-icon svg {
+    color: #ffffff !important;
+    stroke: #ffffff !important;
+}
+
+.modal-icon svg,
+.login-icon svg {
+    width: 48px;
+    height: 48px;
+}
+
+@media (max-width: 768px) {
+    .view-toggle {
+        width: 100%;
+    }
+
+    .toggle-btn {
+        min-height: 3rem;
+        padding: 0.75rem 0.65rem !important;
+        font-size: 0.92rem;
+    }
+
+    .event-card {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        min-height: 0 !important;
+        border-radius: 24px !important;
+    }
+
+    .event-illustration,
+    .event-icon-illustration {
+        height: 156px !important;
+        min-height: 156px !important;
+        border-right: 0;
+        border-bottom: 1px solid rgba(29, 78, 216, 0.08);
+    }
+
+    .event-icon-large,
+    .meeting-icon-custom {
+        width: 74px;
+        height: 74px;
+        border-radius: 22px;
+    }
+
+    .event-icon-large svg,
+    .meeting-icon-custom svg {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .event-content {
+        padding: 1.25rem !important;
+    }
+
+    .event-title,
+    .meeting-card-event .event-title {
+        font-size: 1.45rem;
+        line-height: 1.18;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .view-toggle-indicator,
+    .toggle-btn,
+    .event-card,
+    .event-icon-large,
+    .meeting-icon-custom {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
     </style>
     
     <!-- Firebase SDK -->
@@ -4766,38 +5087,13 @@ h4,
                     
                     <!-- View Toggle Switch -->
                     <div style="display: flex; justify-content: center; margin: 2rem 0;">
-                        <div class="view-toggle" style="
-                            background: #f0f0f0;
-                            border-radius: 50px;
-                            padding: 4px;
-                            display: inline-flex;
-                            gap: 4px;
-                            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
-                        ">
-                            <button id="event-view-btn" class="toggle-btn active" onclick="switchEventView('list')" style="
-                                padding: 0.75rem 2rem;
-                                border: none;
-                                border-radius: 50px;
-                                background: linear-gradient(135deg, #1d4ed8 0%, #facc15 100%);
-                                color: white;
-                                font-weight: 600;
-                                cursor: pointer;
-                                transition: all 0.3s ease;
-                                box-shadow: 0 4px 12px rgba(29, 78, 216, 0.24);
-                            ">
-                                📋 Event View
+                        <div class="view-toggle" data-view="list" aria-label="Events display mode">
+                            <span class="view-toggle-indicator" aria-hidden="true"></span>
+                            <button id="event-view-btn" type="button" class="toggle-btn active" onclick="switchEventView('list')" aria-pressed="true">
+                                <span class="toggle-icon" aria-hidden="true">📋</span> Event View
                             </button>
-                            <button id="calendar-view-btn" class="toggle-btn" onclick="switchEventView('calendar')" style="
-                                padding: 0.75rem 2rem;
-                                border: none;
-                                border-radius: 50px;
-                                background: transparent;
-                                color: #666;
-                                font-weight: 600;
-                                cursor: pointer;
-                                transition: all 0.3s ease;
-                            ">
-                                📅 Calendar View
+                            <button id="calendar-view-btn" type="button" class="toggle-btn" onclick="switchEventView('calendar')" aria-pressed="false">
+                                <span class="toggle-icon" aria-hidden="true">📅</span> Calendar View
                             </button>
                         </div>
                     </div>
@@ -6672,6 +6968,24 @@ h4,
                     }
                 });
 
+                document.querySelectorAll('#admin-menu-modal .admin-menu-modal-item').forEach((menuItem) => {
+                    const iconElement = menuItem.querySelector('span:first-child');
+                    if (!iconElement) return;
+
+                    const label = menuItem.textContent.trim();
+                    const iconName = label.includes('Settings') ? 'settings' : label.includes('Close') ? 'xmark' : 'logout';
+                    iconElement.innerHTML = renderModernIcon(iconName, { size: 20, stroke: 'currentColor', strokeWidth: 2.2 });
+                });
+
+                document.querySelectorAll('.settings-tab').forEach((tab) => {
+                    const iconElement = tab.querySelector('span:first-child');
+                    if (!iconElement) return;
+
+                    const label = tab.textContent.trim();
+                    const iconName = label.includes('Officer') ? 'tie' : label.includes('FAQ') ? 'help' : 'phone';
+                    iconElement.innerHTML = renderModernIcon(iconName, { size: 18, stroke: 'currentColor', strokeWidth: 2.2 });
+                });
+
                 document.querySelectorAll('.admin-menu-item').forEach((menuItem, index) => {
                     const iconElement = menuItem.querySelector('span:first-child');
                     if (!iconElement) return;
@@ -6687,6 +7001,7 @@ h4,
                     const match = onclickValue.match(/select(?:Edit)?(?:Contact|Form)?Icon\('([^']+)'/);
                     if (!match) return;
                     const iconValue = match[1];
+                    element.dataset.iconValue = iconValue;
                     element.innerHTML = renderModernIcon(iconValue, { size: 20, stroke: 'currentColor', strokeWidth: 2.2 });
                 });
                 console.log('🎨 All icons injected successfully');
@@ -8822,35 +9137,22 @@ h4,
             const calendarView = document.getElementById('event-calendar-view');
             const eventViewBtn = document.getElementById('event-view-btn');
             const calendarViewBtn = document.getElementById('calendar-view-btn');
+            const viewToggle = eventViewBtn?.closest('.view-toggle');
+            const isCalendarView = view === 'calendar';
+
+            if (!listView || !calendarView || !eventViewBtn || !calendarViewBtn) return;
             
-            if (view === 'list') {
-                // Show list view, hide calendar
-                listView.style.display = 'block';
-                calendarView.style.display = 'none';
-                
-                // Update button styles
-                eventViewBtn.style.background = 'linear-gradient(135deg, #1d4ed8 0%, #60a5fa 100%)';
-                eventViewBtn.style.color = 'white';
-                eventViewBtn.style.boxShadow = '0 4px 12px rgba(29, 78, 216, 0.22)';
-                
-                calendarViewBtn.style.background = 'transparent';
-                calendarViewBtn.style.color = '#52607a';
-                calendarViewBtn.style.boxShadow = 'none';
-            } else if (view === 'calendar') {
-                // Show calendar view, hide list
-                listView.style.display = 'none';
-                calendarView.style.display = 'block';
-                
-                // Update button styles
-                calendarViewBtn.style.background = 'linear-gradient(135deg, #1d4ed8 0%, #60a5fa 100%)';
-                calendarViewBtn.style.color = 'white';
-                calendarViewBtn.style.boxShadow = '0 4px 12px rgba(29, 78, 216, 0.22)';
-                
-                eventViewBtn.style.background = 'transparent';
-                eventViewBtn.style.color = '#52607a';
-                eventViewBtn.style.boxShadow = 'none';
-                
-                // Load calendar when switching to it
+            viewToggle?.setAttribute('data-view', isCalendarView ? 'calendar' : 'list');
+
+            listView.style.display = isCalendarView ? 'none' : 'flex';
+            calendarView.style.display = isCalendarView ? 'block' : 'none';
+
+            eventViewBtn.classList.toggle('active', !isCalendarView);
+            calendarViewBtn.classList.toggle('active', isCalendarView);
+            eventViewBtn.setAttribute('aria-pressed', String(!isCalendarView));
+            calendarViewBtn.setAttribute('aria-pressed', String(isCalendarView));
+
+            if (isCalendarView) {
                 renderCalendar();
             }
         }
@@ -9808,8 +10110,11 @@ h4,
         }
 
         function getAttendanceKnownNameRecords() {
-            const savedNames = attendanceScans.flatMap(scan => Array.isArray(scan.names) ? scan.names : []);
-            return normalizeAttendanceRecords([...attendanceMemberRoster, ...savedNames]);
+            return normalizeAttendanceRecords([...attendanceMemberRoster]);
+        }
+
+        function getAttendanceCurrentRosterRecords() {
+            return normalizeAttendanceRecords([...attendanceMemberRoster]);
         }
 
         function scoreAttendanceNameMatch(rawName, rosterRecord) {
@@ -9832,7 +10137,7 @@ h4,
             const cleaned = cleanAttendanceName(rawName);
             if (!cleaned) return null;
 
-            const roster = getAttendanceKnownNameRecords();
+            const roster = getAttendanceCurrentRosterRecords();
             if (!roster.length) return null;
 
             const cleanedKey = normalizeAttendanceNameKey(cleaned);
@@ -9894,7 +10199,7 @@ h4,
             const cleaned = cleanAttendanceName(rawName);
             if (!cleaned) return null;
 
-            const hasRoster = getAttendanceKnownNameRecords().length > 0;
+            const hasRoster = getAttendanceCurrentRosterRecords().length > 0;
             const rosterMatch = hasRoster
                 ? findAttendanceRosterMatch(cleaned, {
                     minScore: options.minScore ?? 0.52,
@@ -9962,7 +10267,7 @@ h4,
             const lineItems = Array.isArray(data?.lines) && data.lines.length
                 ? data.lines
                 : [];
-            const hasRoster = getAttendanceKnownNameRecords().length > 0;
+            const hasRoster = getAttendanceCurrentRosterRecords().length > 0;
             const candidates = [];
             const accepted = [];
             const seen = new Set();
@@ -10585,7 +10890,7 @@ h4,
 
                 const dateInput = document.getElementById('attendance-scan-date');
                 const titleInput = document.getElementById('attendance-meeting-title');
-                const memberRoster = getAttendanceKnownNameRecords().map(member => member.fullName);
+                const memberRoster = getAttendanceCurrentRosterRecords().map(member => member.fullName);
                 const headers = { 'Content-Type': 'application/json' };
 
                 const adminUser = await waitForFirebaseAdminUser();
@@ -10628,7 +10933,7 @@ h4,
                         return item.fullName || item.name || `${item.firstName || ''} ${item.lastName || ''}`.trim();
                     })
                     .map(name => {
-                        const hasRoster = getAttendanceKnownNameRecords().length > 0;
+                        const hasRoster = getAttendanceCurrentRosterRecords().length > 0;
                         return guessAttendanceNameRecord(name, {
                             minScore: hasRoster ? 0.52 : 0.68,
                             neededGap: 0,
@@ -10649,6 +10954,13 @@ h4,
             } catch (error) {
                 console.error('Attendance AI read failed:', error);
                 const message = error?.message || 'AI reader is not available yet.';
+                if (/high demand|busy|rate limit|too many requests|temporarily unavailable|503|429/i.test(message)) {
+                    attendanceAiFallbackMessage = 'AI was busy, so we used OCR instead.';
+                    attendanceIsProcessing = false;
+                    if (continueBtn) continueBtn.disabled = false;
+                    await readAttendanceNames();
+                    return false;
+                }
                 setAttendanceStatus(`AI scanner could not run: ${message}`, 'error');
                 return false;
             } finally {
@@ -11469,6 +11781,7 @@ h4,
         function selectFormIcon(icon, element) {
             selectedFormIcon = icon;
             document.getElementById('form-icon').value = icon;
+            setModernIcon(document.getElementById('form-builder-icon'), icon, { size: 48, stroke: 'white', strokeWidth: 1.9 });
             // Update UI
             document.querySelectorAll('.icon-option').forEach(opt => opt.classList.remove('selected'));
             element.classList.add('selected');
@@ -12000,12 +12313,12 @@ h4,
             document.getElementById('edit-form-title').value = form.title;
             document.getElementById('edit-form-description').value = form.description;
             document.getElementById('edit-form-icon').value = form.icon;
-            document.getElementById('edit-form-builder-icon').textContent = form.icon;
+            setModernIcon(document.getElementById('edit-form-builder-icon'), form.icon && form.icon.trim() ? form.icon : 'document', { size: 48, stroke: 'white', strokeWidth: 1.9 });
             
             // Set icon picker selection
             document.querySelectorAll('#edit-icon-picker .icon-option').forEach(el => {
                 el.classList.remove('selected');
-                if (el.textContent === form.icon) {
+                if (el.dataset.iconValue === form.icon) {
                     el.classList.add('selected');
                 }
             });
@@ -12060,7 +12373,7 @@ h4,
             document.querySelectorAll('#edit-icon-picker .icon-option').forEach(el => el.classList.remove('selected'));
             element.classList.add('selected');
             document.getElementById('edit-form-icon').value = emoji;
-            document.getElementById('edit-form-builder-icon').textContent = emoji;
+            setModernIcon(document.getElementById('edit-form-builder-icon'), emoji, { size: 48, stroke: 'white', strokeWidth: 1.9 });
         }
 
         function selectContactIcon(emoji, element) {
@@ -12934,7 +13247,10 @@ h4,
             }
             
             // Update form header
-            document.getElementById('form-fill-icon').textContent = currentFormData.icon && currentFormData.icon.trim() ? currentFormData.icon : '📝';
+            const formFillIconElement = document.getElementById('form-fill-icon');
+            if (formFillIconElement) {
+                formFillIconElement.innerHTML = renderModernIcon(currentFormData.icon && currentFormData.icon.trim() ? currentFormData.icon : 'document', { size: 48, stroke: 'white', strokeWidth: 1.9 });
+            }
             document.getElementById('form-fill-title').textContent = currentFormData.title;
             document.getElementById('form-fill-description').textContent = currentFormData.description;
             
@@ -14109,6 +14425,8 @@ h4,
             
             // Combine all items and sort by date
             const allItems = [...activeEvents, ...meetingsAsEvents].sort((a, b) => a.timestamp - b.timestamp);
+            const eventTextEntities = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+            const escapeEventText = (value) => String(value || '').replace(/[&<>"']/g, char => eventTextEntities[char]);
             
             // Clear container
             eventsContainer.innerHTML = '';
@@ -14138,18 +14456,27 @@ h4,
                 
                 // Determine icon content
                 const iconContent = item.icon === 'MEETING_ICON' 
-                    ? `<div class="meeting-icon-custom">${getMeetingIcon()}</div>`
+                    ? `<div class="meeting-icon-custom">${renderModernIcon('users', { size: 46, stroke: 'currentColor', strokeWidth: 2.1 })}</div>`
                     : `<div class="event-icon-large">${renderModernIcon(item.icon && item.icon.trim() ? item.icon : 'calendar', { size: 32, stroke: 'currentColor', strokeWidth: 2.2 })}</div>`;
+                const typeLabel = item.isMeeting ? 'Meeting' : 'Event';
+                const title = escapeEventText(item.title);
+                const formattedDate = escapeEventText(item.formattedDate);
+                const description = escapeEventText(item.description);
+                const descriptionMarkup = description ? `<p class="event-description">${description}</p>` : '';
                 
                 eventCard.innerHTML = `
                     <div class="event-illustration event-icon-illustration">
                         ${iconContent}
                     </div>
                     <div class="event-content">
-                        <div class="event-date-badge">
-                            ${renderModernIcon('calendar', { size: 14, stroke: 'currentColor', strokeWidth: 2 })} ${item.formattedDate}
+                        <div class="event-card-meta">
+                            <span class="event-type-chip">${typeLabel}</span>
+                            <div class="event-date-badge">
+                                ${renderModernIcon('calendar', { size: 14, stroke: 'currentColor', strokeWidth: 2 })} ${formattedDate}
+                            </div>
                         </div>
-                        <h3 class="event-title">${item.title}</h3>
+                        <h3 class="event-title">${title}</h3>
+                        ${descriptionMarkup}
                     </div>
                 `;
                 eventsContainer.appendChild(eventCard);
@@ -14168,7 +14495,7 @@ h4,
             
             // Handle meeting icon specially
             if (event.icon === 'MEETING_ICON') {
-                detailsIconElement.innerHTML = getMeetingIcon();
+                detailsIconElement.innerHTML = renderModernIcon('users', { size: 48, stroke: 'white', strokeWidth: 1.9 });
                 detailsIconElement.style.display = 'flex';
                 detailsIconElement.style.justifyContent = 'center';
                 detailsIconElement.style.alignItems = 'center';
