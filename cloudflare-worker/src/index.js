@@ -124,9 +124,9 @@ function buildPrompt({ meetingTitle, scanDate, roster }) {
     'Return only JSON with this shape: {"names":[{"fullName":"First Last"}]}',
     'Do not include printed instructions, blank lines, dates, titles, decorative text, or phone numbers.',
     'Read names left column top-to-bottom, then right column top-to-bottom.',
-    roster.length
-      ? 'Use the member roster as the source of truth. For each handwritten line, choose the closest matching roster name even when handwriting is imperfect.'
-      : 'If no roster match is available, make your best readable guess for each handwritten name.',
+    'Transcribe the visible handwriting. New members may not be in the roster; include their names exactly as read.',
+    'Never replace a written name with the closest roster name. The roster is optional spelling context only when the handwriting clearly supports it.',
+    'Do not invent a name for illegible handwriting. An administrator will review and match the transcription.',
     'Do not add people who do not appear to have signed the sheet.',
     `Meeting title: ${meetingTitle || ''}`,
     `Scan date: ${scanDate || ''}`,

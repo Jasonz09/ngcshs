@@ -8,7 +8,11 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**",
-      "cloudflare-worker/**"
+      "**/*.log",
+      "cloudflare-worker/**",
+      "database.rules.json",
+      "POINTS-SETUP.md",
+      "points.test.cjs"
     ]
   }
 }

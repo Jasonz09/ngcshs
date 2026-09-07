@@ -1,5 +1,18 @@
 {
   "rules": {
+    "pointsAdmins": {
+      ".read": false,
+      ".write": false
+    },
+    "clubPoints": {
+      ".read": "auth != null && (auth.token.admin === true || root.child('pointsAdmins').child(auth.uid).val() === true)",
+      ".write": "auth != null && (auth.token.admin === true || root.child('pointsAdmins').child(auth.uid).val() === true)",
+      "entries": {
+        "$entry": {
+          ".validate": "(!data.exists() || newData.val() === data.val()) && newData.hasChildren(['memberId', 'year', 'amount', 'reason', 'date', 'actor', 'at', 'type']) && newData.child('amount').isNumber() && newData.child('amount').val() !== 0 && newData.child('reason').isString() && newData.child('memberId').isString() && (data.exists() || newData.child('actor').val() === auth.uid)"
+        }
+      }
+    },
     "contacts": {
       ".read": true,
       ".write": "auth != null"

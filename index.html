@@ -5155,8 +5155,9 @@ h4,
                 <div class="container">
                     <div class="section-header-row">
                         <div class="section-header-copy">
-                            <h2 class="section-title">Attendance Scanner</h2>
-                            <p class="section-subtitle">Admin-only tools for scanning signup sheets and saving meeting attendance.</p>
+                            <h2 class="section-title">Attendance &amp; Points</h2>
+                            <p class="section-subtitle">Verify meeting attendance and track member progress.</p>
+                            <a href="#points-dashboard">View Points Dashboard</a>
                         </div>
                     </div>
 
@@ -5179,7 +5180,10 @@ h4,
 
                             <img id="attendance-preview-image" class="attendance-preview" alt="Signup sheet preview" />
 
-                            <input type="hidden" id="attendance-scan-date" />
+                            <div class="attendance-field">
+                                <label for="attendance-scan-date">Meeting date</label>
+                                <input type="date" id="attendance-scan-date" />
+                            </div>
 
                             <div class="attendance-field-row attendance-title-row">
                                 <div class="attendance-field">
@@ -5208,7 +5212,7 @@ h4,
                             </div>
 
                             <div class="attendance-save-row">
-                                <button class="attendance-save-btn" type="button" onclick="saveAttendanceScan()">Save Scan</button>
+                                <button class="attendance-save-btn" type="button" onclick="window.clubPoints.review()">Review &amp; Award Points</button>
                             </div>
                         </div>
 
@@ -5216,7 +5220,7 @@ h4,
                             <div class="attendance-card-header">
                                 <div>
                                     <h3 class="attendance-card-title">Saved Scans</h3>
-                                    <p class="attendance-card-subtitle">Recent attendance entries grouped as saved records.</p>
+                                    <p class="attendance-card-subtitle">Previous scan records. New approvals appear under Approved Meetings in the points dashboard.</p>
                                 </div>
                             </div>
                             <div class="attendance-roster-panel">
@@ -10267,20 +10271,13 @@ h4,
             const lineItems = Array.isArray(data?.lines) && data.lines.length
                 ? data.lines
                 : [];
-            const hasRoster = getAttendanceCurrentRosterRecords().length > 0;
             const candidates = [];
             const accepted = [];
             const seen = new Set();
 
             if (!lineItems.length) {
                 const fallbackRecords = extractAttendanceNames(text);
-                const records = fallbackRecords
-                    .map(record => guessAttendanceNameRecord(record.fullName, {
-                        minScore: hasRoster ? 0.52 : 0.68,
-                        neededGap: 0,
-                        allowRawFallback: !hasRoster
-                    }))
-                    .filter(Boolean);
+                const records = fallbackRecords;
                 return {
                     text,
                     records,
@@ -10297,17 +10294,9 @@ h4,
 
                 const confidence = getAttendanceOcrConfidence(line);
                 const minimum = getMinimumAttendanceOcrConfidence(cleaned, baseConfidence);
-                const rosterMatch = findAttendanceRosterMatch(cleaned, {
-                    minScore: confidence !== null && confidence < minimum ? 0.52 : 0.62,
-                    neededGap: 0
-                });
                 candidates.push({ cleaned, confidence, minimum });
 
-                const record = rosterMatch
-                    ? makeAttendanceNameRecord(rosterMatch.record.fullName)
-                    : hasRoster
-                        ? null
-                        : makeAttendanceNameRecord(cleaned);
+                const record = makeAttendanceNameRecord(cleaned);
                 if (!record) return;
                 if (!record.key || seen.has(record.key)) return;
 
@@ -10911,7 +10900,7 @@ h4,
                         scanDate: dateInput?.value || '',
                         meetingTitle: titleInput?.value || '',
                         memberRoster,
-                        matchingMode: 'choose-closest-roster-name'
+                        matchingMode: 'transcribe-visible-names'
                     })
                 });
 
@@ -10932,14 +10921,7 @@ h4,
                         if (!item || typeof item !== 'object') return '';
                         return item.fullName || item.name || `${item.firstName || ''} ${item.lastName || ''}`.trim();
                     })
-                    .map(name => {
-                        const hasRoster = getAttendanceCurrentRosterRecords().length > 0;
-                        return guessAttendanceNameRecord(name, {
-                            minScore: hasRoster ? 0.52 : 0.68,
-                            neededGap: 0,
-                            allowRawFallback: !hasRoster
-                        });
-                    })
+                    .map(name => makeAttendanceNameRecord(cleanAttendanceName(name)))
                     .filter(Boolean)
                     .map(record => makeAttendanceNameRecord(record.fullName));
 
@@ -14861,5 +14843,8 @@ h4,
         }
         </script>
 
+        <link rel="stylesheet" href="points.css" />
+        <script src="points-core.js"></script>
+        <script src="points.js"></script>
     </body>
 </html>
